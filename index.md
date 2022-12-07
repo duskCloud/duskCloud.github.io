@@ -1,5 +1,3 @@
----
-layout : default
----
+theme: minial
 
 # duskCloud.github.io
