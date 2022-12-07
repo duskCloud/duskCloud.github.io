@@ -1,3 +1,3 @@
-theme: minial
+theme: minima
 
 # duskCloud.github.io
