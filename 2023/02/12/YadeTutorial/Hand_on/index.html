@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Hand on - duskCloud blog</title>
+
+  
+    <meta name="description" content="Shell 基础文件树目录树是在操作系统中组织文件的分层方式。Linux 中典型的文件(简化)树如下所示： 12345678910111213141516171819202122&#x2F;            Root├──boot        System startup├──bin         Low-level programs├──lib         Low-level librari">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hand on">
+<meta property="og:url" content="https://duskcloud.github.io/2023/02/12/YadeTutorial/Hand_on/index.html">
+<meta property="og:site_name" content="duskCloud blog">
+<meta property="og:description" content="Shell 基础文件树目录树是在操作系统中组织文件的分层方式。Linux 中典型的文件(简化)树如下所示： 12345678910111213141516171819202122&#x2F;            Root├──boot        System startup├──bin         Low-level programs├──lib         Low-level librari">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-02-12T12:25:05.147Z">
+<meta property="article:modified_time" content="2023-02-12T12:25:33.782Z">
+<meta property="article:author" content="duskCloud">
+<meta property="article:tag" content="yade">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">duskCloud blog</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">No Results!</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Hand on</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%A0%91"><span class="toc-text">文件树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shell-%E5%AF%BC%E8%88%AA"><span class="toc-text">Shell 导航</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8"><span class="toc-text">移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E9%94%AE"><span class="toc-text">按键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="toc-text">运行程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-%E5%9F%BA%E7%A1%80"><span class="toc-text">Python 基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Yade-%E5%9F%BA%E7%A1%80"><span class="toc-text">Yade 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Particles-%E7%B2%92%E5%AD%90"><span class="toc-text">Particles 粒子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E4%B8%AA%E7%B2%92%E5%AD%90%E5%88%9B%E5%BB%BA"><span class="toc-text">单个粒子创建</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Packs"><span class="toc-text">Packs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Boundaries-%E8%BE%B9%E7%95%8C"><span class="toc-text">Boundaries 边界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%86%85%E9%83%A8"><span class="toc-text">查看内部</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Engines-%E5%BC%95%E6%93%8E"><span class="toc-text">Engines 引擎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%94%E7%B3%BB"><span class="toc-text">联系</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a><span class="sep"></span><a class="cap breadcrumb" href="/">Blog</a></div><div id="post-meta">Posted on&nbsp;<time datetime="2023-02-12T12:25:05.147Z">2023-02-12</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Hand on</span></h1>
+<h1 id="Shell-基础"><a href="#Shell-基础" class="headerlink" title="Shell 基础"></a>Shell 基础</h1><h2 id="文件树"><a href="#文件树" class="headerlink" title="文件树"></a>文件树</h2><p>目录树是在操作系统中组织文件的分层方式。Linux 中典型的文件(简化)树如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/            Root</span><br><span class="line">├──boot        System startup</span><br><span class="line">├──bin         Low-level programs</span><br><span class="line">├──lib         Low-level libraries</span><br><span class="line">├──dev         Hardware access</span><br><span class="line">├──sbin        Administration programs</span><br><span class="line">├──proc        System information</span><br><span class="line">├──var         Files modified by system services</span><br><span class="line">├──root        Root (administrator) home directory</span><br><span class="line">├──etc         Configuration files</span><br><span class="line">├──media       External drives</span><br><span class="line">├──tmp         Temporary files</span><br><span class="line">├──usr         Everything for normal operation (usr = UNIX system resources)</span><br><span class="line">│    ├──bin       User programs</span><br><span class="line">│    ├──sbin      Administration programs</span><br><span class="line">│    ├──include   Header files for c/c++</span><br><span class="line">│    ├──lib       Libraries</span><br><span class="line">│    ├──local     Locally installed software</span><br><span class="line">│    └──doc       Documentation</span><br><span class="line">└──home        Contains the user&#x27;s home directories</span><br><span class="line">     ├──user      Home directory for user</span><br><span class="line">     └──user1     Home directory for user1</span><br></pre></td></tr></table></figure>
+<p>注意这里只有一个单独的树；其他硬盘(例如U盘)挂载在树中的一点下(如&#x2F;media)。</p>
+<h2 id="Shell-导航"><a href="#Shell-导航" class="headerlink" title="Shell 导航"></a>Shell 导航</h2><p>Shell是Unix的命令行用以与系统交互。 Don’t be afraid.</p>
+<h3 id="移动"><a href="#移动" class="headerlink" title="移动"></a>移动</h3><p>可以通过Shell在文件树中移动</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">user@machine:~$                         # user operating at machine, in the directory ~ (= user&#x27;s home directory)</span><br><span class="line">user@machine:~$ ls .                    # list contents of the current directory</span><br><span class="line">user@machine:~$ ls foo                  # list contents of directory foo, relative to the dcurrent directory ~ (= ls ~/foo = ls /home/user/foo)</span><br><span class="line">user@machine:~$ ls /tmp                 # list contents of /tmp</span><br><span class="line">user@machine:~$ cd foo                  # change directory to foo</span><br><span class="line">user@machine:~/foo$ ls ~                # list home directory (= ls /home/user)</span><br><span class="line">user@machine:~/foo$ cd bar              # change to bar (= cd ~/foo/bar)</span><br><span class="line">user@machine:~/foo/bar$ cd ../../foo2   # go to the parent directory twice, then to foo2 (cd ~/foo/bar/../../foo2 = cd ~/foo2 = cd /home/user/foo2)</span><br><span class="line">user@machine:~/foo2$ cd                 # go to the home directory (= ls ~ = ls /home/user)</span><br><span class="line">user@machine:~$</span><br></pre></td></tr></table></figure>
+<p>通常，用户在其文件夹中具有读写权限，如 &#x2F;home&#x2F;user和&#x2F;tmp，也可以读取系统中其他大部分文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user@machine:~$ ls /root    # see what files the administrator has</span><br><span class="line">ls: cannot open directory /root: Permission denied</span><br></pre></td></tr></table></figure>
+<h3 id="按键"><a href="#按键" class="headerlink" title="按键"></a>按键</h3><p>常用按键如下:</p>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;tab&gt;</td>
+<td>显示可补全的内容</td>
+</tr>
+<tr>
+<td>^C (&#x3D;Ctrl+C)</td>
+<td>删除当前行</td>
+</tr>
+<tr>
+<td>^D</td>
+<td>退出Shell</td>
+</tr>
+<tr>
+<td>↑↓</td>
+<td>在命令行历史记录中移动</td>
+</tr>
+<tr>
+<td>^C</td>
+<td>打断当前正在运行的程序</td>
+</tr>
+<tr>
+<td>^\</td>
+<td>杀死当前运行的程序</td>
+</tr>
+<tr>
+<td>Shift-PgUp</td>
+<td>向上滚动屏幕</td>
+</tr>
+<tr>
+<td>Shift-PgDown</td>
+<td>向下滚动屏幕</td>
+</tr>
+</tbody></table>
+<h3 id="运行程序"><a href="#运行程序" class="headerlink" title="运行程序"></a>运行程序</h3><p>当运行一个没有给出完整路径的程序时，系统会在<code>$PATH</code>中搜索。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user@machine:~$ echo $PATH     # show the value of $PATH</span><br><span class="line">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</span><br><span class="line">user@machine:~$ which ls       # say what is the real path of ls</span><br></pre></td></tr></table></figure>
+<h2 id="Python-基础"><a href="#Python-基础" class="headerlink" title="Python 基础"></a>Python 基础</h2><h2 id="Yade-基础"><a href="#Yade-基础" class="headerlink" title="Yade 基础"></a>Yade 基础</h2><p>Yade对象通过实例化创建，如以下方式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Yade [36]: Sphere           # try also Sphere?</span><br><span class="line">Out[36]: yade.wrapper.Sphere</span><br><span class="line"></span><br><span class="line">Yade [37]: s=Sphere()       # create a Sphere, without specifying any attributes</span><br><span class="line"></span><br><span class="line">Yade [38]: s.radius         # &#x27;nan&#x27; is a special value meaning &quot;not a number&quot; (i.e. not defined)</span><br><span class="line">Out[38]: nan</span><br><span class="line"></span><br><span class="line">Yade [39]: s.radius=2       # set radius of an existing object</span><br><span class="line"></span><br><span class="line">Yade [40]: s.radius</span><br><span class="line">Out[40]: 2.0</span><br><span class="line"></span><br><span class="line">Yade [41]: ss=Sphere(radius=3)   # create Sphere, giving radius directly</span><br><span class="line"></span><br><span class="line">Yade [42]: s.radius, ss.radius     # also try typing s.&lt;tab&gt; to see defined attributes</span><br><span class="line">Out[42]: (2.0, 3.0)</span><br></pre></td></tr></table></figure>
+<h3 id="Particles-粒子"><a href="#Particles-粒子" class="headerlink" title="Particles 粒子"></a>Particles 粒子</h3><p>Particles 是用以模拟的data对象，它们会经历一些过程，虽然现在还没有定义。</p>
+<h4 id="单个粒子创建"><a href="#单个粒子创建" class="headerlink" title="单个粒子创建"></a>单个粒子创建</h4><p>有许多预定义的函数用来创建某些类型的粒子；为创建一个sphere球体，需要:</p>
+<ol>
+<li>Create Body 创建一个Body</li>
+<li>Set Body.shape to be an instance of Sphere with some given radius 通过一些参数设置Body形状</li>
+<li>Set Body.material 设置Body材料，使用最后一次创建的材料，否则使用默认材料</li>
+<li>在Body.state 中设置位置和方向状态，根据材料和形状计算质量和惯性矩.<br>为避免繁琐创建，Yade提供简化函数。如utils.sphere，utils.facet，utils.wall。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Yade [43]: s=utils.sphere((0,0,0),radius=1)    # create sphere particle centered at (0,0,0) with radius=1</span><br><span class="line"></span><br><span class="line">Yade [44]: s.shape                       # s.shape describes the geometry of the particle</span><br><span class="line">Out[44]: &lt;Sphere instance at 0x339d650&gt;</span><br><span class="line"></span><br><span class="line">Yade [45]: s.shape.radius                # we already know the Sphere class</span><br><span class="line">Out[45]: 1.0</span><br><span class="line"></span><br><span class="line">Yade [46]: s.state.mass, s.state.inertia # inertia is computed from density and geometry</span><br><span class="line">Out[46]: </span><br><span class="line">(4188.790204786391,</span><br><span class="line"> Vector3(1675.516081914556253,1675.516081914556253,1675.516081914556253))</span><br><span class="line"></span><br><span class="line">Yade [47]: s.state.pos                   # position is the one we prescribed</span><br><span class="line">Out[47]: Vector3(0,0,0)</span><br><span class="line"></span><br><span class="line">Yade [48]: s2=utils.sphere((-2,0,0),radius=1,fixed=True)     # explanation below</span><br></pre></td></tr></table></figure>
+在最后一个语句中，粒子通过<code>utils.shpere</code>的参数<code>fixed</code>固定在空间中以防止移动，进而构成初始边界条件。<br>粒子对象并不是模拟的全部，进行下一步还需要调用一个特殊的函数<code>O.bodies.append</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Yade [49]: O.bodies.append(s)            # adds particle s to the simulation; returns id of the particle(s) added</span><br><span class="line">Out[49]: 24</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Packs"><a href="#Packs" class="headerlink" title="Packs"></a>Packs</h3><p>在<code>pack</code>模块中有用以生成特殊粒子序列的函数；例如，粒子云可由<code> pack.SpherePack</code>类生成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Yade [50]: from yade import pack</span><br><span class="line"></span><br><span class="line">Yade [51]: sp=pack.SpherePack()                   # create an empty cloud; SpherePack contains only geometrical information</span><br><span class="line"></span><br><span class="line">Yade [52]: sp.makeCloud((1,1,1),(2,2,2),rMean=.2) # put spheres with defined radius inside box given by corners (1,1,1) and (2,2,2)</span><br><span class="line">Out[52]: 8</span><br><span class="line"></span><br><span class="line">Yade [53]: for c,r in sp: print(c,r)               # print center and radius of all particles (SpherePack is a sequence which can be iterated over)</span><br><span class="line">   ....: </span><br><span class="line">Vector3(1.577889023765002285,1.721224540149461912,1.296535996507017785) 0.2</span><br><span class="line">Vector3(1.688464584622245024,1.72322752536125523,1.717122284573653346) 0.2</span><br><span class="line">Vector3(1.218405499935725445,1.358570888863975368,1.796451085857081686) 0.2</span><br><span class="line">Vector3(1.270974198229762209,1.743076120666066098,1.610130651546826108) 0.2</span><br><span class="line">Vector3(1.791018110292273091,1.386492344860074333,1.398521108729773754) 0.2</span><br><span class="line">Vector3(1.246175170816176347,1.211920867632996668,1.387296344351888422) 0.2</span><br><span class="line">Vector3(1.202324092218342244,1.585345529527522945,1.238712690496557522) 0.2</span><br><span class="line">Vector3(1.687446180906541082,1.268340543912729546,1.772108090509637135) 0.2</span><br><span class="line"></span><br><span class="line">Yade [54]: sp.toSimulation()                      # create particles and add them to the simulation</span><br><span class="line">Out[54]: [25, 26, 27, 28, 29, 30, 31, 32]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Boundaries-边界"><a href="#Boundaries-边界" class="headerlink" title="Boundaries 边界"></a>Boundaries 边界</h3><p><code>utils.facet</code> (三角面) 和 <code>utils.wall</code>(无限的平面) 通常用来定义边界。例如，在模拟中创建一个地板floor如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Yade [55]: O.bodies.append(utils.wall(-1,axis=2))</span><br><span class="line">Out[55]: 33</span><br></pre></td></tr></table></figure>
+<h3 id="查看内部"><a href="#查看内部" class="headerlink" title="查看内部"></a>查看内部</h3><p>可通过多种方式检查模拟，所有数据可由Python直径访问。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Yade [56]: len(O.bodies)</span><br><span class="line">Out[56]: 34</span><br><span class="line"></span><br><span class="line">Yade [57]: O.bodies[10].shape.radius   # radius of body #10 (will give error if not sphere, since only spheres have radius defined)</span><br><span class="line">Out[57]: 0.16</span><br><span class="line"></span><br><span class="line">Yade [58]: O.bodies[12].state.pos      # position of body #12</span><br><span class="line">Out[58]: Vector3(1.000320911443931315,1.550796011829636667,1.421621448908745755)</span><br></pre></td></tr></table></figure>
+<p>此外，Yade在启动时(命令行之前)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[ ^L clears screen, ^U kills line. F12 controller, F11 3d view, F10 both, F9 generator, F8 plot. ]]</span><br></pre></td></tr></table></figure>
+<p><code>Controller</code>:按下<code>F12</code>可出现控制模拟的窗口。尽管在大型模拟中通常不会进行人工干预(这些模拟是“无头”运行的，没有任何图形交互)，但在小示例中这很方便。这里有关于模拟的基本信息(将在后面使用)。<br><code>3d view</code> : 3d视图可以用<code>F11</code>打开(或者点击控制器中的按钮-见下文)。有许多快捷键可以操作它(按h键可以获得基本帮助)，并且可以使用鼠标移动、旋转和缩放它。可以在控制器的“Display”选项卡中设置显示相关的设置(例如是否绘制粒子)。<br><strong>练习</strong></p>
+<ol>
+<li>下面代码的运行状态<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Yade [59]: O.bodies.append([utils.sphere((2*i,0,0),1) for i in range(1,20)])</span><br><span class="line">Out[59]: [34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52]</span><br></pre></td></tr></table></figure></li>
+<li>在封闭的box(0,0,0)(1,1,1)中创建简单的平均半径为.1的球体粒子云模拟(提示：<code>pack.SpherePack.makeCloud</code>)</li>
+<li>将上述创建的粒子云放于上端开口的box(0,0,0)(1,1,1)中(提示： utils.facetBox; type utils.facetBox? or utils.facetBox?? to get help on the command line) (新版本已丢弃？译者使用gemo.facetBox)</li>
+<li>打开3D视图，尝试放大&#x2F;缩小;定位坐标轴，使z向上，y向右，x向你。</li>
+</ol>
+<h3 id="Engines-引擎"><a href="#Engines-引擎" class="headerlink" title="Engines 引擎"></a>Engines 引擎</h3><p>Engines定义了由粒子进行的过程。从理论介绍中我们知道，Engines的序列称为模拟循环。让我们定义一个简单的交互循环:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Yade [60]: O.engines=[                   # newlines and indentations are not important until the brace is closed</span><br><span class="line">   ....:    ForceResetter(),</span><br><span class="line">   ....:    InsertionSortCollider([Bo1_Sphere_Aabb(),Bo1_Wall_Aabb()]),</span><br><span class="line">   ....:    InteractionLoop(           # dtto for the parenthesis here</span><br><span class="line">   ....:        [Ig2_Sphere_Sphere_ScGeom(),Ig2_Wall_Sphere_ScGeom()],</span><br><span class="line">   ....:        [Ip2_FrictMat_FrictMat_FrictPhys()],</span><br><span class="line">   ....:        [Law2_ScGeom_FrictPhys_CundallStrack()]</span><br><span class="line">   ....:    ),</span><br><span class="line">   ....:    NewtonIntegrator(damping=.2,label=&#x27;newtonCustomLabel&#x27;)      # define a label newtonCustomLabel under which we can access this engine easily</span><br><span class="line">   ....: ]</span><br><span class="line">   ....: </span><br><span class="line"></span><br><span class="line">Yade [61]: O.engines</span><br><span class="line">Out[61]: </span><br><span class="line">[&lt;ForceResetter instance at 0x3286640&gt;,</span><br><span class="line"> &lt;InsertionSortCollider instance at 0x33f8300&gt;,</span><br><span class="line"> &lt;InteractionLoop instance at 0x320d4d0&gt;,</span><br><span class="line"> &lt;NewtonIntegrator instance at 0x20d9cb0&gt;]</span><br><span class="line"></span><br><span class="line">Yade [62]: O.engines[-1]==newtonCustomLabel    # is it the same object? 引擎名称</span><br><span class="line">Out[62]: True</span><br><span class="line"></span><br><span class="line">Yade [63]: newtonCustomLabel.damping</span><br><span class="line">Out[63]: 0.2</span><br></pre></td></tr></table></figure>
+<p>我们可以在文件(脚本)中描述模拟，然后以该文件作为参数运行yade，而不是将所有内容都输入到命令行中。因此，除非必要，否则我们将不再显示命令行;相反，只显示脚本部分。如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">O.engines=[                   # newlines and indentations are not important until the brace is closed</span><br><span class="line">        ForceResetter(),</span><br><span class="line">        InsertionSortCollider([Bo1_Sphere_Aabb(),Bo1_Wall_Aabb()]),</span><br><span class="line">        InteractionLoop(           # dtto for the parenthesis here</span><br><span class="line">                 [Ig2_Sphere_Sphere_ScGeom(),Ig2_Wall_Sphere_ScGeom()],</span><br><span class="line">                 [Ip2_FrictMat_FrictMat_FrictPhys()],</span><br><span class="line">                 [Law2_ScGeom_FrictPhys_CundallStrack()]</span><br><span class="line">        ),</span><br><span class="line">        GravityEngine(gravity=(0,0,-9.81)),                    # 9.81 is the gravity acceleration, and we say that</span><br><span class="line">        NewtonIntegrator(damping=.2,label=&#x27;newtonCustomLabel&#x27;) # define a label under which we can access this engine easily</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>除了正在运行的Engines，定义它们运行的频率也同样重要。有些Engines只能运行一段时间(我们将在后面看到)，而大多数Engines将始终运行;两次连续运行Engines之间的时间是时间步(Δt)。在时间步长的数值上有一个数学限制，称为临界时间步长，它是由粒子的性质计算出来的。由于有相应的函数，我们可以使用<code>utils.PWaveTimeStep</code>设置时间步长:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O.dt=utils.PWaveTimeStep()</span><br></pre></td></tr></table></figure>
+<p>每次模拟循环结束时，时间<code>O.time</code>向前移动时间步长<code>O.dt</code>:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Yade [64]: O.dt=0.01</span><br><span class="line"></span><br><span class="line">Yade [65]: O.time</span><br><span class="line">Out[65]: 0.0</span><br><span class="line"></span><br><span class="line">Yade [66]: O.step()</span><br><span class="line"></span><br><span class="line">Yade [67]: O.time</span><br><span class="line">Out[67]: 0.01</span><br></pre></td></tr></table></figure>
+
+<h3 id="联系"><a href="#联系" class="headerlink" title="联系"></a>联系</h3><ol>
+<li>如上图所示定义引擎，运行检查器并单击引擎以查看它们的顺序。</li>
+<li>编写一个简单的脚本<ol>
+<li>像前面练习中那样定义粒子(从顶部打开的盒子内的球体云)</li>
+<li>定义一个简单的模拟循环，如上所述</li>
+<li>设置Δt等于临界p波Δt</li>
+<li>将初始模拟状态保存到内存中</li>
+</ol>
+</li>
+<li>多次运行前面定义的模拟，同时更改timestep的值(使用⟳按钮重新加载初始配置)。<ol>
+<li>看看在p波值以上增加Δt会发生什么。</li>
+<li>在运行模拟之前，尝试更改重力参数。</li>
+<li>试着改变阻尼</li>
+<li>重新加载模拟，打开3d视图，打开Inspector，在3d视图中选择一个粒子(shift-click)。然后运行模拟，观察作用在粒子上的力是如何变化的;在中间的某个地方暂停模拟，看看这个粒子的相互作用。</li>
+</ol>
+</li>
+<li>到什么时候我们才能说沉积已经完成，这样模拟就可以停止了?</li>
+</ol>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>License</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">Newer</div><a href="/2023/02/12/YadeTutorial/SceneConstruction/">Scene Construction</a></div><div class="item" id="next"><div class="note">Older</div><a href="/2023/02/12/YadeTutorial/dataMining/">Data mining</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: 'Just',
+      min: 'minutes ago',
+      hour: 'hours ago',
+      day: 'days ago',
+      month: 'months ago',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

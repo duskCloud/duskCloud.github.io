@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Data mining - duskCloud blog</title>
+
+  
+    <meta name="description" content="Data miningReadLocal data所有的模拟数据均可由python访问;当你打开Inspector 时,蓝色标签内的数据可以被点击–左键跳转到文档，中键复制对象名称（使用Ctrl-v或中键点击复制到其他地方),其中有一些有趣的东西(see Omega for a full list).  O.engines在模拟循环中，Engines 通过其index访问  12O.engines">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data mining">
+<meta property="og:url" content="https://duskcloud.github.io/2023/02/12/YadeTutorial/dataMining/index.html">
+<meta property="og:site_name" content="duskCloud blog">
+<meta property="og:description" content="Data miningReadLocal data所有的模拟数据均可由python访问;当你打开Inspector 时,蓝色标签内的数据可以被点击–左键跳转到文档，中键复制对象名称（使用Ctrl-v或中键点击复制到其他地方),其中有一些有趣的东西(see Omega for a full list).  O.engines在模拟循环中，Engines 通过其index访问  12O.engines">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-02-12T12:25:05.105Z">
+<meta property="article:modified_time" content="2023-02-12T12:25:16.159Z">
+<meta property="article:author" content="duskCloud">
+<meta property="article:tag" content="yade">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">duskCloud blog</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">No Results!</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Data mining</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Read"><span class="toc-text">Read</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Local-data"><span class="toc-text">Local data</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Labels"><span class="toc-text">Labels</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Exercises"><span class="toc-text">Exercises</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Global-data"><span class="toc-text">Global data</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Energies"><span class="toc-text">Energies</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Save"><span class="toc-text">Save</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PyRunner"><span class="toc-text">PyRunner</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Keeping-history"><span class="toc-text">Keeping history</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Plot"><span class="toc-text">Plot</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Energy-plots"><span class="toc-text">Energy plots</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Energy-plot-example"><span class="toc-text">Energy plot example</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Using-multiple-plots"><span class="toc-text">Using multiple plots</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercises-1"><span class="toc-text">Exercises</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a><span class="sep"></span><a class="cap breadcrumb" href="/">Blog</a></div><div id="post-meta">Posted on&nbsp;<time datetime="2023-02-12T12:25:05.105Z">2023-02-12</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Data mining</span></h1>
+<h1 id="Data-mining"><a href="#Data-mining" class="headerlink" title="Data mining"></a>Data mining</h1><h2 id="Read"><a href="#Read" class="headerlink" title="Read"></a>Read</h2><h3 id="Local-data"><a href="#Local-data" class="headerlink" title="Local data"></a>Local data</h3><p>所有的模拟数据均可由python访问;当你打开<em>Inspector</em> 时,蓝色标签内的数据可以被点击–左键跳转到文档，中键复制对象名称（使用<code>Ctrl-v</code>或中键点击复制到其他地方),其中有一些有趣的东西(see <code>Omega</code> for a full list).</p>
+<ol>
+<li><p><code>O.engines</code><br>在模拟循环中，<code>Engines</code> 通过其<code>index</code>访问</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">O.engines[0]      # first engine</span><br><span class="line">O.engines[-1]     # last engine</span><br></pre></td></tr></table></figure>
+<p>注意::<code>O.engines</code>被修改后,其<code>index</code>也会改变. 下面一节介绍的<code>Labeling</code>是可靠访问特定<code>engines</code>的更好解决方案。</p>
+</li>
+<li><p><code>O.bodies</code></p>
+<p> 通过<code>id</code>识别<code>Bodies</code>, 并保证<code>id</code>在整个模拟过程中不会改变。</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">O.bodies[0]         # first body</span><br><span class="line">[b.shape.radius for b in O.bodies if isinstance(b.shape,Sphere)]    # list of radii of all spherical bodies</span><br><span class="line">sum([b.state.mass for b in O.bodies])                               # sum of masses of all bodies</span><br><span class="line">numpy.average([b.state.vel[0] for b in O.bodies])                   # average velocity in x direction</span><br></pre></td></tr></table></figure>
+<p>注意:: 并不能保证 <code>Body.id</code>的唯一性,因为新创建的<code>Body</code>可能会使用之前被删除<code>Body</code>的<code>id</code>。</p>
+</li>
+<li><p><code>O.forces</code><br> 作用在每个粒子上的广义力(力，力矩)。它们(通常)在每一步的开始用ForceResetter重置，随后来自个别交互的力在InteractionLoop中积累。要访问数据，请使用:</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">O.forces.f(0)     # force on #0</span><br><span class="line">O.forces.t(1)     # torque on #1</span><br></pre></td></tr></table></figure></li>
+<li><p><code>O.interactions</code><br> 相互作用通过各自相互作用粒子的id来识别(它们在模拟过程中自动创建和删除):</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">O.interactions[0,1]   # interactions of #0 with #1</span><br><span class="line">O.interactions[1,0]   # the same object</span><br><span class="line">O.bodies[0].intrs()   # all interactions of body #0</span><br><span class="line">for i in O.bodies[12].intrs(): print (i.isReal,i.id1,i.id2)    # get some info about interactions of body #12</span><br><span class="line">[(i.isReal,i.id1,i.id2) for i in O.bodies[12].intrs()]         # same thing, but make a list</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="Labels"><a href="#Labels" class="headerlink" title="Labels"></a>Labels</h4><p><code>Engines</code> and <code>functors</code> 可以被标记(labeled), 这意味着Python会自动创建该名称的变量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@suppress</span><br><span class="line">Yade [1]: from yade import *</span><br><span class="line">	</span><br><span class="line">Yade [1]: O.engines=[</span><br><span class="line">	...:    NewtonIntegrator(damping=.2,label=&#x27;newtonCustomLabel&#x27;)</span><br><span class="line">	...: ]</span><br><span class="line">	...:</span><br><span class="line"></span><br><span class="line">Yade [1]: newtonCustomLabel.damping=.4</span><br><span class="line"></span><br><span class="line">Yade [1]: O.engines[0].damping              # O.engines[0] and newtonCustomLabel are the same objects</span><br><span class="line"></span><br><span class="line">Yade [1]: newtonCustomLabel==O.engines[0]   # O.engines[0] and newtonCustomLabel are the same objects</span><br></pre></td></tr></table></figure>
+
+<h4 id="Exercises"><a href="#Exercises" class="headerlink" title="Exercises"></a>Exercises</h4><ol>
+<li><p>下列表达式的意义</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">max([b.state.vel.norm() for b in O.bodies])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行脚本 <code>gravity-deposition</code>, 模拟几秒钟后暂停。编写计算表达式</p>
+<ol>
+<li>kinetic energy $\sum \frac{1}{2} m_i |v_i| ^2$</li>
+<li>average mass (hint: use <code>numpy.average </code>)</li>
+<li>maximum $z$-coordinate of all particles</li>
+<li>number of interactions of body #1</li>
+</ol>
+</li>
+</ol>
+<h3 id="Global-data"><a href="#Global-data" class="headerlink" title="Global data"></a>Global data</h3><p>模拟过程中一些有用的数值。</p>
+<p><code>unbalanced force</code><br>    最大接触力与最大平均力之比;静力测量，用不平衡力计算</p>
+<p><code>porosity</code><br>    空隙体积与总容积之比; computed with <code>porosity</code>.</p>
+<p><code>coordination number</code><br>    每个粒子的平均相互作用数,<code>avgNumInteractions</code></p>
+<p><code>stress tensor</code> (periodic boundary conditions)<br>    相互作用的平均力, computed with <code>normalShearStressTensors</code></p>
+<p><code>fabric tensor</code><br>    空间接触的分布(尚未实施); 可通过<code>plotDirections</code>可视化</p>
+<h4 id="Energies"><a href="#Energies" class="headerlink" title="Energies"></a>Energies</h4><p>对模拟中所有组件(如重力功、动能、塑料耗散、阻尼耗散)的 energy data 进行评估, 启用如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O.trackEnergy=True</span><br></pre></td></tr></table></figure>
+<p>其次, energy data 可以通过 <code>O.energy</code>访问; 它是一个字典，它的条目可以用<code>keys()</code>检索，其值可以用<code>O.energy[key]</code>检索。</p>
+<h2 id="Save"><a href="#Save" class="headerlink" title="Save"></a>Save</h2><h3 id="PyRunner"><a href="#PyRunner" class="headerlink" title="PyRunner"></a>PyRunner</h3><p>保存我们刚学会访问的数据, 我们需要从<em>simulation loop</em> 中调用Python。<code>PyRunner</code>就是为此而创建的;它从<code>PeriodicEngine</code>中继承了周期性控制，并将代码作为名为<em>command</em>的文本属性(必须加引号，即在&#39;…&#39;)运行。例如，在<code>O.engines</code>后面加上这个。引擎将打印当前的步数每一秒钟clokc time.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O.engines=O.engines+[ PyRunner(command=&#x27;print(O.iter)&#x27;,realPeriod=1) ]</span><br></pre></td></tr></table></figure>
+
+<p>在<em>command</em>中编写复杂的代码是很尴尬的;在这种情况下，我们定义一个函数将被调用:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def myFunction():</span><br><span class="line">    &#x27;&#x27;Print step number, and pause the simulation is unbalanced force is smaller than 0.05.&#x27;&#x27;&#x27;</span><br><span class="line">	print(O.iter)</span><br><span class="line">	if utils.unbalancedForce()&lt;0.05:</span><br><span class="line">		print(&#x27;Unbalanced force is smaller than 0.05, pausing.&#x27;)</span><br><span class="line">		O.pause()</span><br></pre></td></tr></table></figure>
+<p>现在，将函数添加至<code>O.engines</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O.engines+=[PyRunner(command=&#x27;myFunction()&#x27;,iterPeriod=100)]</span><br></pre></td></tr></table></figure>
+<p>或者，通常像这样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">O.engines=[</span><br><span class="line">	# ...</span><br><span class="line">	PyRunner(command=&#x27;myFunction()&#x27;,iterPeriod=100) # call myFunction every 100 steps</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+<p>警告::<br>    如果在yade会话(ipython)中声明了一个函数，并且PyRunner属性updateGlobals被设置为False，则会出现错误NameError: name ‘myFunction’没有定义，除非python globals()用command更新</p>
+<figure class="highlight plaintext"><figcaption><span>python</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">globals().update(locals())</span><br></pre></td></tr></table></figure>
+
+<p>练习：</p>
+<ol>
+<li>运行 <code>gravity-deposition</code> 模拟, 如下做出改变:<ol start="2">
+<li>每隔两秒打印<code>yade._utils.unbalancedForce</code> .</li>
+<li>每1000步检查一次unbalanced force<ul>
+<li>如果小于 0.2, 设置:<code>damping</code> 为0.8 (提示: 使用 labels)</li>
+<li>如果小于0.1，则暂停模拟</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="Keeping-history"><a href="#Keeping-history" class="headerlink" title="Keeping history"></a>Keeping history</h3><p>Yade提供了用于存储和绘制变量的plot模块(绘制本身将在后面讨论)。让我们从导入这个模块开始，并声明将要绘制的变量名:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from yade import plot</span><br><span class="line">plot.plots=&#123;&#x27;t&#x27;:(&#x27;coordNum&#x27;,&#x27;unForce&#x27;,None,&#x27;Ek&#x27;)&#125;                # kinetic energy will have legend on the right as indicated by None separator.</span><br></pre></td></tr></table></figure>
+<p>数据的定期存储是通过PyRunner和plot完成的。addData函数。同时让我们启用 energy tracking:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">O.trackEnergy=True</span><br><span class="line">def addPlotData():</span><br><span class="line">	# this function adds current values to the history of data, under the names specified</span><br><span class="line">	plot.addData(t=O.time,Ek=utils.kineticEnergy(),coordNum=utils.avgNumInteractions(),unForce=utils.unbalancedForce())</span><br></pre></td></tr></table></figure>
+<p>现在这个函数可以被添加至<code>O.engines</code>::</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O.engines+=[PyRunner(command=&#x27;addPlotData()&#x27;,iterPeriod=20)]</span><br></pre></td></tr></table></figure>
+<p>或者，通常像这样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">O.engines=[  # ...,</span><br><span class="line">	PyRunner(command=&#x27;addPlotData()&#x27;,iterPeriod=20)         # call the addPlotData function every 20 iterations</span><br><span class="line">	]</span><br></pre></td></tr></table></figure>
+<p>历史数据储存在<code>yade.plot.data</code>, 可以通过变量名称访问。例如<code>plot.data[&#39;Ek&#39;]</code>，可以通过<code>yade.plot.saveDataTxt</code>保存至txt文件（在yade外做后处理）。</p>
+<h2 id="Plot"><a href="#Plot" class="headerlink" title="Plot"></a>Plot</h2><p><code>yade.plot</code>提供了绘制被<code>yade.plot.addData</code>储存的历史数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot.plots=&#123;&#x27;t&#x27;:(&#x27;coordNum&#x27;,&#x27;unForce&#x27;,None,&#x27;Ek&#x27;)&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所有值的历史记录以<code>yade.plot.addData</code>的名称给出;字典的键值是x轴上的变量，变量按照顺序在y轴上。<code>None</code>分割左右轴的数据（独立缩放）。图表被创建如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot.plot()         # on the command line, F8 can be used as shorthand</span><br></pre></td></tr></table></figure>
+<p>当图表打开，会定期更新，以便实时看到模拟演变。</p>
+<h3 id="Energy-plots"><a href="#Energy-plots" class="headerlink" title="Energy plots"></a>Energy plots</h3><p>绘制所有energy的contributions将是困难的，因为所有energy的名称可能无法事先知道。幸运的是，Yade有办法解决这个问题。它由两部分组成:</p>
+<ol>
+<li><p><code>yade.plot.addData</code> 给出了目前定义的所有energy::</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot.addData(i=O.iter,total=O.energy.total(),**O.energy)</span><br></pre></td></tr></table></figure>
+
+<p>  <code>O.energy.total</code> 会计算所有energies 总和.  <code>**O.energy</code> 是特殊的python语法, 将 dictionary (记住<code>O.energy</code> 是一个字典) 转变成命名函数的参数, 因此以下两个命令是相同的</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function(a=3,b=34)              # give arguments as arguments</span><br><span class="line">function(**&#123;&#x27;a&#x27;:3,&#x27;b&#x27;:34&#125;)      # create arguments from dictionary</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>要绘制的数据使用 <em>function</em> 指定，该函数提供要绘制的数据的名称，而不是直接提供数据名称:</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot.plots=&#123;&#x27;i&#x27;:[&#x27;total&#x27;]+O.energy.keys()&#125;</span><br></pre></td></tr></table></figure>
+<p>其中<code>total</code>是基于上面<code>O.energy.total()</code>的名称，<code>O.energy.keys()</code>将总是返回当前定义的energy列表。</p>
+</li>
+</ol>
+<h4 id="Energy-plot-example"><a href="#Energy-plot-example" class="headerlink" title="Energy plot example"></a>Energy plot example</h4><p>在yade会话内部中绘制energies，例如启动<br><code>examples/test/triax-basic-without-plots.py</code> 将会如下所示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from yade import plot</span><br><span class="line">O.trackEnergy=True</span><br><span class="line">O.step()                          # performing a single simulation step is necessary to populate O.energy.keys()</span><br><span class="line">plot.plots=&#123;&#x27;t&#x27;:O.energy.keys()+[&#x27;total&#x27;]&#125;</span><br><span class="line"></span><br><span class="line">def addPlotData():</span><br><span class="line">	# this function adds current values to the history of data, under the names specified</span><br><span class="line">	plot.addData( t=O.time , total=O.energy.total() , **O.energy )</span><br><span class="line"></span><br><span class="line">O.engines+=[PyRunner(command=&#x27;addPlotData()&#x27;,iterPeriod=20)]</span><br><span class="line"></span><br><span class="line">globals().update(locals())        # do this only because this is an example of a live yade session</span><br></pre></td></tr></table></figure>
+<p>Press F8 to show plot window and F11 to show 3D view, then press  ▶  to start simulation.</p>
+<h4 id="Using-multiple-plots"><a href="#Using-multiple-plots" class="headerlink" title="Using multiple plots"></a>Using multiple plots</h4><p>也可以制作独立绘图，例如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plot.plots=&#123; &#x27;t&#x27;:(&#x27;total&#x27;,&#x27;kinetic&#x27;) , &#x27;t &#x27;:[&#x27;elastPotential&#x27;,&#x27;gravWork&#x27;] , &#x27;t  &#x27;:(&#x27;nonviscDamp&#x27;) &#125;</span><br></pre></td></tr></table></figure>
+<p>警告<br>在不同的plots中不能声明重复的名称。这就是为什么上面使用空格来表示相同的变量<code>t</code>。</p>
+<p>With the caveat above, a following example inside a <em>live</em> yade session launched on <code>examples/test/triax-basic-without-plots.py</code> would look following::</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">from yade import plot</span><br><span class="line">O.trackEnergy=True</span><br><span class="line">plot.plots=&#123; &#x27;t&#x27;:(&#x27;total&#x27;,&#x27;kinetic&#x27;) , &#x27;t &#x27;:[&#x27;elastPotential&#x27;,&#x27;gravWork&#x27;] , &#x27;t  &#x27;:(&#x27;nonviscDamp&#x27;) &#125;</span><br><span class="line"></span><br><span class="line">def addPlotData():</span><br><span class="line">	# assign value to all three: &#x27;t&#x27;, &#x27;t &#x27; and &#x27;t  &#x27; with single t=... assignment</span><br><span class="line">	plot.addData( t=O.time , total=O.energy.total() , **O.energy )</span><br><span class="line"></span><br><span class="line">O.engines+=[PyRunner(command=&#x27;addPlotData()&#x27;,iterPeriod=20)]</span><br><span class="line"></span><br><span class="line">globals().update(locals())        # do this only because this is an example of a live yade session</span><br><span class="line"></span><br><span class="line">plot.plot(subPlots=False)         # show plots in separate windows</span><br><span class="line"></span><br><span class="line">plot.plot(subPlots=True)          # same as pressing F8: close current plot windows and reopen a single new one</span><br></pre></td></tr></table></figure>
+
+<p>Press F8 to show plot window and F11 to show 3D view, then press  ▶ to start simulation, see <code>video</code>__ below:</p>
+<h3 id="Exercises-1"><a href="#Exercises-1" class="headerlink" title="Exercises"></a>Exercises</h3><ol>
+<li>计算y方向的平均动量.</li>
+<li>运行 <code>gravity-deposition</code> 脚本, 绘制 unbalanced force 和 kinetic energy.</li>
+<li>在脚本运行时, 尝试改变 <code>NewtonIntegrator.damping</code> 参数 (do it from both <em>Inspector</em> and from the command-line). 它对不平衡力和动能的演化有什么影响?</li>
+<li>思考并写下所有的能源来源(输入);还要写下所有的能量消耗(耗散)。</li>
+<li>模拟<code>gravity-deposition</code> 并绘制所有energies 在模拟过程中的变化。</li>
+</ol>
+<p>注意<br>Most :<code>examples</code> use plotting facilities of Yade, some of them also track energy of the simulation.</p>
+<p><a target="_blank" rel="noopener" href="https://yade-dem.org/doc/tutorial-data-mining.html">https://yade-dem.org/doc/tutorial-data-mining.html</a></p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>License</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">Newer</div><a href="/2023/02/12/YadeTutorial/Hand_on/">Hand on</a></div><div class="item" id="next"><div class="note">Older</div><a href="/2023/02/12/hello-world/">Hello World</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: 'Just',
+      min: 'minutes ago',
+      hour: 'hours ago',
+      day: 'days ago',
+      month: 'months ago',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
